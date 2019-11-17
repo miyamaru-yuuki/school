@@ -28,7 +28,7 @@ class SchoolController extends Controller
         $seito = new Seito();
         $testData= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->select(DB::raw('sum(kokugo) AS kokugosum,sum(sugaku) AS sugakusum,sum(eigo) AS eigosum,name,kokugo,sugaku,eigo'))
+            ->select(DB::raw('sum(kokugo) AS kokugosum,sum(sugaku) AS sugakusum,sum(eigo) AS eigosum,name'))
             ->groupBy('kekka.tid','name')
             ->where('tid', $tid)
             ->get();
