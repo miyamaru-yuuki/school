@@ -30,6 +30,7 @@ class SchoolController extends Controller
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->select(DB::raw('*,kokugo+sugaku+eigo AS goukei'))
             ->where('tid', $tid)
+            ->orderBy('goukei', 'desc')
             ->get();
 
         return view('school.seiseki', ['testData' => $testData]);
