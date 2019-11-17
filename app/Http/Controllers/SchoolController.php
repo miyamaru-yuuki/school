@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Seito;
 use App\Models\Kekka;
 use App\Models\Test;
+use DB;
 
 class SchoolController extends Controller
 {
@@ -27,8 +28,12 @@ class SchoolController extends Controller
         $seito = new Seito();
         $testData= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->select(DB::raw('sum(kokugo) AS kokugosum,sum(sugaku) AS sugakusum,sum(eigo) AS eigosum,name,kokugo,sugaku,eigo'))
+            ->groupBy('kekka.tid','name')
             ->where('tid', $tid)
             ->get();
+
+        dd($testData);
 
         return view('school.seiseki', ['testData' => $testData]);
     }
