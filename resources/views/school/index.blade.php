@@ -13,5 +13,14 @@
     @endforeach
 </table>
 
+<br>
+
+<table>
+    <tr><th>テスト</th></tr>
+    @foreach ($testData as $data)
+        <tr><td><a href="{{url('seiseki/' .$data->tid)}}">{{$data->tname}}</a></td></tr>
+    @endforeach
+</table>
+
 </body>
 </html>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use App\Models\Seito;
+use App\Models\Kekka;
+use App\Models\Test;
 
 class SchoolController extends Controller
 {
@@ -13,6 +15,21 @@ class SchoolController extends Controller
         $seitoData = $seito
             ->all();
 
-        return view('school.index', ['seitoData' => $seitoData]);
+        $test = new Test();
+        $testData = $test
+            ->all();
+
+        return view('school.index', ['seitoData' => $seitoData,'testData' => $testData]);
+    }
+
+    public function seiseki($tid)
+    {
+        $seito = new Seito();
+        $testData= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->where('tid', $tid)
+            ->get();
+
+        return view('school.seiseki', ['testData' => $testData]);
     }
 }
