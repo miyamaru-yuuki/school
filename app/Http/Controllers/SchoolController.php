@@ -28,14 +28,18 @@ class SchoolController extends Controller
         $seito = new Seito();
         $testData= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->select(DB::raw('*,kokugo+sugaku+eigo AS goukei,avg(kokugo+sugaku+eigo)'))
+            ->select(DB::raw('*,kokugo+sugaku+eigo AS goukei'))
             ->where('tid', $tid)
-            ->groupby('kekka.kid')
             ->orderBy('goukei', 'desc')
             ->get();
 
-        dd($testData);
+        $testAvg= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg,name'))
+            ->where('tid', $tid)
+            ->groupby('tid', 'name')
+            ->get();
 
-        return view('school.seiseki', ['testData' => $testData]);
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg]);
     }
 }
