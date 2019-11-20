@@ -12,7 +12,7 @@
         <tr><td>{{$data->name}}</td><td>{{$data->kokugo}}</td><td>{{$data->sugaku}}</td><td>{{$data->eigo}}</td><td>{{$data->goukei}}</td></tr>
     @endforeach
     @foreach ($testAvg as $data)
-        <tr><td>{{$data->name}}</td><td>{{$data->kokugoavg}}</td><td>{{$data->sugakuavg}}</td><td>{{$data->eigoavg}}</td><td>{{$data->goukeiavg}}</td></tr>
+        <tr><td></td><td>{{$data->kokugoavg}}</td><td>{{$data->sugakuavg}}</td><td>{{$data->eigoavg}}</td><td>{{$data->goukeiavg}}</td></tr>
     @endforeach
 </table>
 

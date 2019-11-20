@@ -35,9 +35,9 @@ class SchoolController extends Controller
 
         $testAvg= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg,name'))
+            ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg'))
             ->where('tid', $tid)
-            ->groupby('tid', 'name')
+            ->groupby('tid')
             ->get();
 
         return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg]);
