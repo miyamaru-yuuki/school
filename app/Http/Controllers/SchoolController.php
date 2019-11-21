@@ -33,8 +33,8 @@ class SchoolController extends Controller
             ->orderBy('goukei', 'desc')
             ->get();
 
-        $testAvg= $seito
-            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+        $kekka = new Kekka();
+        $testAvg= $kekka
             ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg'))
             ->where('tid', $tid)
             ->groupby('tid')
