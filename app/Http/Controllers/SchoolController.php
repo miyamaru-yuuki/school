@@ -37,7 +37,6 @@ class SchoolController extends Controller
         $testAvg= $kekka
             ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg'))
             ->where('tid', $tid)
-            ->groupby('tid')
             ->get();
 
         return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg]);
