@@ -53,6 +53,12 @@ class SchoolController extends Controller
             ->orderBy('test.tid', 'asc')
             ->get();
 
-        return view('school.kobetuseiseki', ['testData' => $testData]);
+        $testAvg= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->select(DB::raw('avg(kokugo) AS kokugoavg,avg(sugaku) AS sugakuavg,avg(eigo) AS eigoavg,avg(kokugo+sugaku+eigo) AS goukeiavg'))
+            ->where('seito.seitoid', $seitoid)
+            ->get();
+
+        return view('school.kobetuseiseki', ['testData' => $testData,'testAvg' => $testAvg]);
     }
 }
