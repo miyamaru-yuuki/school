@@ -41,4 +41,18 @@ class SchoolController extends Controller
 
         return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg]);
     }
+
+    public function kobetuseiseki($seitoid)
+    {
+        $seito = new Seito();
+        $testData= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->join('test', 'test.tid', '=', 'kekka.tid')
+            ->select(DB::raw('*,kokugo+sugaku+eigo AS goukei'))
+            ->where('seito.seitoid', $seitoid)
+            ->orderBy('test.tid', 'asc')
+            ->get();
+
+        return view('school.kobetuseiseki', ['testData' => $testData]);
+    }
 }

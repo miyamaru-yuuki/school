@@ -9,7 +9,7 @@
 <table>
     <tr><th>名前</th><th>生年月日</th><th>電話番号</th></tr>
     @foreach ($seitoData as $data)
-        <tr><td>{{$data->name}}</td><td>{{$data->birth}}</td><td>{{$data->tel}}</td></tr>
+        <tr><td><a href="{{url('kobetuseiseki/' .$data->seitoid)}}">{{$data->name}}</a></td><td>{{$data->birth}}</td><td>{{$data->tel}}</td></tr>
     @endforeach
 </table>
 
