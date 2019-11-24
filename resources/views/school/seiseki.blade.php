@@ -16,5 +16,7 @@
     @endforeach
 </table>
 
+<p>国語の最高得点者：{{$kokugoMax[0]['name']}}</p>
+
 </body>
 </html>
