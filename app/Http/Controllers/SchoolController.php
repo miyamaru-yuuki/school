@@ -42,12 +42,8 @@ class SchoolController extends Controller
         $kokugoMax= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->join('test', 'test.tid', '=', 'kekka.tid')
-            ->whereIn(DB::raw('name'),
-                function($query)
-                {
-                    $query->select('kokugo', DB::raw('max(kokugo)'))
-                        ->from('kekka');
-                })
+            ->select(DB::raw('name'))
+            ->where('kokugo','max(kokugo)')
             ->where('test.tid', $tid)
             ->get();
 
