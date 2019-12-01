@@ -16,7 +16,8 @@
     @endforeach
 </table>
 
-<p>国語の最高得点者：{{$kokugoMax[0]['name']}}</p>
+<p>国語の最高得点者：@foreach($kokugoMax as $data)
+        {{$data['name']}}@endforeach</p>
 <p>全教科の最高得点者：@foreach($goukeiMax as $data)
         {{$data['name']}}@endforeach</p>
 
