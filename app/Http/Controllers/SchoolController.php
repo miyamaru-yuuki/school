@@ -45,13 +45,13 @@ class SchoolController extends Controller
             ->whereRaw('kokugo=(SELECT MAX(kokugo) FROM kekka WHERE tid=' .$tid. ')')
             ->get();
 
-        $eigoMax= $seito
+        $goukeiMax= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->select(DB::raw('name'))
-            ->whereRaw('eigo=(SELECT MAX(eigo) FROM kekka WHERE tid=' .$tid. ')')
+            ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=' .$tid. ')')
             ->get();
 
-        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'eigoMax' => $eigoMax]);
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax]);
     }
 
     public function kobetuseiseki($seitoid)

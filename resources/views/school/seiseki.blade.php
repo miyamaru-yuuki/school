@@ -17,7 +17,7 @@
 </table>
 
 <p>国語の最高得点者：{{$kokugoMax[0]['name']}}</p>
-<p>英語の最高得点者：{{$eigoMax[0]['name']}}</p>
+<p>全教科の最高得点者：{{$goukeiMax[0]['name']}}</p>
 
 </body>
 </html>
