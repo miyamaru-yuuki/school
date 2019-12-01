@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Seito;
 use App\Models\Kekka;
 use App\Models\Test;
@@ -73,5 +73,55 @@ class SchoolController extends Controller
             ->get();
 
         return view('school.kobetuseiseki', ['testData' => $testData,'testAvg' => $testAvg]);
+    }
+
+    public function testaddkakunin(\App\Http\Requests\SchoolAddRequest $request)
+    {
+        $tname = $request->input('tname');
+
+        return view('school.testaddkakunin',['tname' => $tname]);
+    }
+
+    public function testaddkanryou(Request $request)
+    {
+        $tname = $request->input('tname');
+
+        $test = new Test();
+        $test->create(['tname' => $tname]);
+
+        return view('school.kanryou',['shori' => 'テスト追加']);
+    }
+
+    public function seisekiaddkakunin(Request $request)
+    {
+        $seitoid = $request->input('seitoid');
+        $tid = $request->input('tid');
+        $kokugo = $request->input('kokugo');
+        $sugaku = $request->input('sugaku');
+        $eigo = $request->input('eigo');
+
+        $seito = new Seito();
+        $seitoData = $seito
+            ->find($seitoid);
+
+        $test = new Test();
+        $testData = $test
+            ->find($tid);
+
+        return view('school.seisekiaddkakunin',['seitoData' => $seitoData,'testData' => $testData,'seitoid' => $seitoid,'tid' => $tid,'kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
+    }
+
+    public function seisekiaddkanryou(Request $request)
+    {
+        $seitoid = $request->input('seitoid');
+        $tid = $request->input('tid');
+        $kokugo = $request->input('kokugo');
+        $sugaku = $request->input('sugaku');
+        $eigo = $request->input('eigo');
+
+        $kekka = new Kekka();
+        $kekka->create(['seitoid' => $seitoid,'tid' => $tid,'kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
+
+        return view('school.kanryou',['shori' => '成績追加']);
     }
 }
