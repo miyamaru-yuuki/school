@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Test;
 
 class SchoolAddRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class SchoolAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'tname'=>'required'
+            'tname'=>'required|unique:Test'
         ];
     }
 
