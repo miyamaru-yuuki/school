@@ -124,4 +124,29 @@ class SchoolController extends Controller
 
         return view('school.kanryou',['shori' => '成績追加']);
     }
+
+    public function tensuuhenkou($kid)
+    {
+        $seito = new Seito();
+        $testData= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->where('kid', $kid)
+            ->get();
+
+        return view('school.tensuuhenkou',['testData' => $testData]);
+    }
+
+    public function tensuuhenkoukanryou(Request $request)
+    {
+        $kid = $request->input('kid');
+        $kokugo = $request->input('kokugo');
+        $sugaku = $request->input('sugaku');
+        $eigo = $request->input('eigo');
+
+        $kekka = new Kekka();
+        $kekka->where('kid',$kid)
+            ->update(['kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
+
+        return view('school.kanryou',['shori' => '点数変更']);
+    }
 }
