@@ -92,7 +92,7 @@ class SchoolController extends Controller
         return view('school.kanryou',['shori' => 'テスト追加']);
     }
 
-    public function seisekiaddkakunin(Request $request)
+    public function seisekiaddkakunin(\App\Http\Requests\SchoolAddRequest $request)
     {
         $seitoid = $request->input('seitoid');
         $tid = $request->input('tid');
