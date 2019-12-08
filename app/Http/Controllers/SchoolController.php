@@ -69,7 +69,11 @@ class SchoolController extends Controller
             ->distinct()
             ->get();
 
-        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid]);
+        $test = new Test();
+        $tname = $test
+            ->find($tid);
+
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid,'tname' => $tname]);
     }
 
     public function kobetuseiseki($seitoid)
