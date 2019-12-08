@@ -22,7 +22,7 @@
     <input type="submit" value="追加">
 </form>
 
-<a href="{{ url('/') }}">戻る</a>
+<a href="{{ url('seiseki/' .$tid) }}">戻る</a>
 
 </body>
 </html>

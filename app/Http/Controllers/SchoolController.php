@@ -135,11 +135,11 @@ class SchoolController extends Controller
         $kokugo = $request->input('kokugo');
         $sugaku = $request->input('sugaku');
         $eigo = $request->input('eigo');
-        
+
         $kekka = new Kekka();
         $kekka->create(['seitoid' => $seitoid,'tid' => $tid,'kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
 
-        return view('school.kanryou',['shori' => '成績追加']);
+        return view('school.seisekiaddkanryou',['shori' => '成績追加','tid' => $tid]);
     }
 
     public function tensuuhenkou($kid)
@@ -156,6 +156,7 @@ class SchoolController extends Controller
     public function tensuuhenkoukanryou(Request $request)
     {
         $kid = $request->input('kid');
+        $tid = $request->input('tid');
         $kokugo = $request->input('kokugo');
         $sugaku = $request->input('sugaku');
         $eigo = $request->input('eigo');
@@ -164,6 +165,6 @@ class SchoolController extends Controller
         $kekka->where('kid',$kid)
             ->update(['kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
 
-        return view('school.kanryou',['shori' => '点数変更']);
+        return view('school.seisekiaddkanryou',['shori' => '点数変更','tid' => $tid]);
     }
 }

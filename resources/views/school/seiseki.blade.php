@@ -23,6 +23,7 @@
 
 <br>
 
+@if(!($seitoData->isEmpty()))
 <form action="/seisekiaddkakunin" method="post">
     {{ csrf_field() }}
     <div>成績追加
@@ -40,6 +41,9 @@
     </div>
     <input type="submit" value="追加">
 </form>
+@endif
+
+<a href="{{ url('/') }}">戻る</a>
 
 </body>
 </html>
