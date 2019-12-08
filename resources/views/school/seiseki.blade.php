@@ -21,5 +21,25 @@
 <p>全教科の最高得点者：@foreach($goukeiMax as $data)
         {{$data['name']}}@endforeach</p>
 
+<br>
+
+<form action="/seisekiaddkakunin" method="post">
+    {{ csrf_field() }}
+    <div>成績追加
+        <p>生徒名：
+            <select name="seitoid">
+                @foreach($seitoData as $data)
+                    <option value="{{$data['seitoid']}}">{{$data['name']}}</option>
+                @endforeach
+            </select>
+        </p>
+        <input type="hidden" name="tid" value="{{$tid}}">
+        <p>国語：<input type="text" name="kokugo"></p>
+        <p>数学：<input type="text" name="sugaku"></p>
+        <p>英語：<input type="text" name="eigo"></p>
+    </div>
+    <input type="submit" value="追加">
+</form>
+
 </body>
 </html>

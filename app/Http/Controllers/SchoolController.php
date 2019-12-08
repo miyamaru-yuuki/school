@@ -52,7 +52,24 @@ class SchoolController extends Controller
             ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=:tid)',['tid' => $tid])
             ->get();
 
-        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax]);
+        $seito = new Seito();
+
+        $seitoid= $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->select(DB::raw('kekka.seitoid'))
+            ->where('tid', $tid)
+            ->distinct()
+            ->get();
+
+        $seitoData = $seito
+            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
+            ->join('test', 'test.tid', '=', 'kekka.tid')
+            ->select(DB::raw('kekka.seitoid,name'))
+            ->whereNotIn('kekka.seitoid',$seitoid)
+            ->distinct()
+            ->get();
+
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid]);
     }
 
     public function kobetuseiseki($seitoid)
@@ -92,7 +109,7 @@ class SchoolController extends Controller
         return view('school.kanryou',['shori' => 'テスト追加']);
     }
 
-    public function seisekiaddkakunin(\App\Http\Requests\SchoolAddRequest $request)
+    public function seisekiaddkakunin(Request $request)
     {
         $seitoid = $request->input('seitoid');
         $tid = $request->input('tid');
@@ -118,7 +135,7 @@ class SchoolController extends Controller
         $kokugo = $request->input('kokugo');
         $sugaku = $request->input('sugaku');
         $eigo = $request->input('eigo');
-
+        
         $kekka = new Kekka();
         $kekka->create(['seitoid' => $seitoid,'tid' => $tid,'kokugo' => $kokugo,'sugaku' => $sugaku,'eigo' => $eigo]);
 
