@@ -42,14 +42,14 @@ class SchoolController extends Controller
         $kokugoMax= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->select(DB::raw('name'))
-            ->whereRaw('kokugo=(SELECT MAX(kokugo) FROM kekka WHERE tid=:tid) AND tid=:tid',['tid' => $tid])
+            ->whereRaw('kokugo=(SELECT MAX(kokugo) FROM kekka WHERE tid=:tid) AND tid=:tid2',['tid' => $tid,'tid2' => $tid])
             ->distinct()
             ->get();
 
         $goukeiMax= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->select(DB::raw('name'))
-            ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=:tid)',['tid' => $tid])
+            ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=:tid) AND tid=:tid2',['tid' => $tid,'tid2' => $tid])
             ->get();
 
         $seito = new Seito();
@@ -165,6 +165,30 @@ class SchoolController extends Controller
         $seito->create(['name' => $name,'birth' => $birth,'tel' => $tel]);
 
         return view('school.kanryou',['shori' => '成績追加']);
+    }
+
+    public function seitohenkou($seitoid)
+    {
+        $seito = new Seito();
+        $seitoData = $seito->find($seitoid);
+
+        $seitoDataAll = $seito->all();
+
+        return view('school.seitohenkou',['seitoData' => $seitoData,'seitoDataAll' => $seitoDataAll]);
+    }
+
+    public function seitohenkoukanryou(Request $request)
+    {
+        $seitoid = $request->input('seitoid');
+        $name = $request->input('name');
+        $birth = $request->input('birth');
+        $tel = $request->input('tel');
+
+        $seito = new Seito();
+        $seito->where('seitoid',$seitoid)
+            ->update(['name' => $name,'birth' => $birth,'tel' => $tel]);
+
+        return view('school.kanryou',['shori' => '変更']);
     }
 
     public function seitodelkakunin($seitoid)

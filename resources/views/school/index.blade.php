@@ -7,9 +7,9 @@
 
 <h1>生徒一覧</h1>
 <table>
-    <tr><th>名前</th><th>生年月日</th><th>電話番号</th><th>削除</th></tr>
+    <tr><th>名前</th><th>生年月日</th><th>電話番号</th><th>編集</th><th>削除</th></tr>
     @foreach ($seitoData as $data)
-        <tr><td><a href="{{url('kobetuseiseki/' .$data->seitoid)}}">{{$data->name}}</a></td><td>{{$data->birth}}</td><td>{{$data->tel}}</td><td><a href="{{url('seitodelkakunin/' .$data->seitoid)}}">削除</a></td></tr>
+        <tr><td><a href="{{url('kobetuseiseki/' .$data->seitoid)}}">{{$data->name}}</a></td><td>{{$data->birth}}</td><td>{{$data->tel}}</td><td><a href="{{url('seitohenkou/' .$data->seitoid)}}">編集</a></td><td><a href="{{url('seitodelkakunin/' .$data->seitoid)}}">削除</a></td></tr>
     @endforeach
 </table>
 
