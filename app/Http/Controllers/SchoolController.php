@@ -52,9 +52,8 @@ class SchoolController extends Controller
             ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=:tid) AND tid=:tid2',['tid' => $tid,'tid2' => $tid])
             ->get();
 
-        $seitoid= $seito
-            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->select(DB::raw('kekka.seitoid'))
+        $seitoid= $kekka
+            ->select(DB::raw('seitoid'))
             ->where('tid', $tid)
             ->distinct()
             ->get();
