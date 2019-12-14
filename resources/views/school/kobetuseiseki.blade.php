@@ -1,10 +1,9 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <title>{{$testData[0]->name}}さんの成績</title>
+    <title>成績</title>
 </head>
 <body>
-
 <h1>{{$testData[0]->name}}さんの成績</h1>
 <table>
     <tr><th>テスト名</th><th>国語</th><th>数学</th><th>英語</th><th>合計</th></tr>
@@ -15,6 +14,5 @@
         <tr><td></td><td>{{$data->kokugoavg}}</td><td>{{$data->sugakuavg}}</td><td>{{$data->eigoavg}}</td><td>{{$data->goukeiavg}}</td></tr>
     @endforeach
 </table>
-
 </body>
 </html>

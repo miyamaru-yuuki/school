@@ -62,10 +62,8 @@ class SchoolController extends Controller
             ->get();
 
         $seitoData = $seito
-            ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->join('test', 'test.tid', '=', 'kekka.tid')
-            ->select(DB::raw('kekka.seitoid,name'))
-            ->whereNotIn('kekka.seitoid',$seitoid)
+            ->select(DB::raw('seitoid,name'))
+            ->whereNotIn('seitoid',$seitoid)
             ->distinct()
             ->get();
 
