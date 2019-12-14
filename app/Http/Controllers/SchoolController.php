@@ -52,8 +52,6 @@ class SchoolController extends Controller
             ->whereRaw('kokugo+sugaku+eigo=(SELECT MAX(kokugo+sugaku+eigo) FROM kekka WHERE tid=:tid) AND tid=:tid2',['tid' => $tid,'tid2' => $tid])
             ->get();
 
-        $seito = new Seito();
-
         $seitoid= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
             ->select(DB::raw('kekka.seitoid'))
@@ -62,6 +60,7 @@ class SchoolController extends Controller
             ->get();
 
         $seitoData = $seito
+            ->select(DB::raw('seitoid,name'))
             ->whereNotIn('seitoid',$seitoid)
             ->get();
 
