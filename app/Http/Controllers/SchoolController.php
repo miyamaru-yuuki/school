@@ -64,7 +64,6 @@ class SchoolController extends Controller
         $seitoData = $seito
             ->select(DB::raw('seitoid,name'))
             ->whereNotIn('seitoid',$seitoid)
-            ->distinct()
             ->get();
 
         $test = new Test();
