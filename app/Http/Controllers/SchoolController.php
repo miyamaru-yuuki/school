@@ -62,7 +62,6 @@ class SchoolController extends Controller
             ->get();
 
         $seitoData = $seito
-            ->select(DB::raw('seitoid,name'))
             ->whereNotIn('seitoid',$seitoid)
             ->get();
 
