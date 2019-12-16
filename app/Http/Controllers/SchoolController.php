@@ -28,9 +28,8 @@ class SchoolController extends Controller
         $seito = new Seito();
         $testData= $seito
             ->join('kekka', 'kekka.seitoid', '=', 'seito.seitoid')
-            ->join('test', 'test.tid', '=', 'kekka.tid')
             ->select(DB::raw('*,kokugo+sugaku+eigo AS goukei'))
-            ->where('test.tid', $tid)
+            ->where('tid', $tid)
             ->orderBy('goukei', 'desc')
             ->get();
 
@@ -64,7 +63,11 @@ class SchoolController extends Controller
             ->whereNotIn('seitoid',$seitoid)
             ->get();
 
-        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid]);
+        $test = new Test();
+        $tname = $test
+            ->find($tid);
+
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid,'tname' => $tname]);
     }
 
     public function kobetuseiseki($seitoid)

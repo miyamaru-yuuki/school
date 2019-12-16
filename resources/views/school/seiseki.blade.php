@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>{{$testData[0]['tname']}}の成績一覧</h1>
+<h1>{{$tname['tname']}}の成績一覧</h1>
 <table>
     <tr><th>名前</th><th>国語</th><th>数学</th><th>英語</th><th>合計</th></tr>
     @foreach ($testData as $data)
