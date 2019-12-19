@@ -4,7 +4,7 @@
     <title>成績</title>
 </head>
 <body>
-<h1>{{$testData[0]->name}}さんの成績</h1>
+<h1>{{$seitoData->name}}さんの成績</h1>
 <table>
     <tr><th>テスト名</th><th>国語</th><th>数学</th><th>英語</th><th>合計</th></tr>
     @foreach ($testData as $data)
