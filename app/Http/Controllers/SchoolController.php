@@ -64,10 +64,10 @@ class SchoolController extends Controller
             ->get();
 
         $test = new Test();
-        $tname = $test
+        $testData2 = $test
             ->find($tid);
 
-        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid,'tname' => $tname]);
+        return view('school.seiseki', ['testData' => $testData,'testAvg' => $testAvg,'kokugoMax' => $kokugoMax,'goukeiMax' => $goukeiMax,'seitoData' => $seitoData,'tid' => $tid,'testData2' => $testData2]);
     }
 
     public function kobetuseiseki($seitoid)
